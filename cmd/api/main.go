@@ -41,7 +41,7 @@ func (a *Application) Register() {
 	a.app.Patch("/feeds/areas", handler.UpdateFeedLocationsHandler(a.repo))
 	a.app.Get("/feeds/:id/", handler.GetFeedById(a.repo))
 	a.app.Post("/events", handler.CreateEventHandler(a.kafkaProducer))
-	a.app.Get("/caches/prune", handler.InvalidateCache())
+	a.app.Delete("/caches", handler.InvalidateCache())
 	a.app.Get("/reasons", handler.GetReasonsHandler(a.repo))
 	needsHandler := handler.NewNeedsHandler(a.repo)
 	a.app.Get("/needs", needsHandler.HandleList)
